@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-
-    
     /**
      * Show the application dashboard.
      *

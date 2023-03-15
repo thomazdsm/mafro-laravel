@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'use_ico_only' => false,
+    'use_ico_only' => true,
     'use_full_favicon' => false,
 
     /*
@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b>MAfro</b>Educ',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'blog/img/mafro_logo_branco.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'blog/img/mafro_logo.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -109,7 +109,7 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'blog/img/mafro_logo.png',
             'alt' => 'MAfroEduc Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
@@ -192,7 +192,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-danger elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -292,11 +292,6 @@ return [
     'menu' => [
         // Navbar items:
         [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-        ],
-        [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],
@@ -304,85 +299,105 @@ return [
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Pesquisar',
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
+            'text'        => 'Dashboard',
+            'url'         => 'admin',
+            'icon'        => 'fas fa-tachometer-alt',
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'CONFIGURAÇÕES DE USUÁRIO'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
+            'text' => 'Meu Perfil',
+            'url'  => 'admin/usuario',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
+            'text' => 'Alterar Senha',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
+            'text' => 'Lista de Usuários',
+            'url'  => 'admin/settings',
+            'icon' => 'fas fa-users-cog',
+        ],
+        ['header' => 'CONFIGURAÇÕES DO BLOG'],
+        [
+            'text' => 'Informações Básicas',
+            'url'  => 'admin/blog',
+            'icon' => 'fas fa-fw fa-info',
+        ],
+        [
+            'text'    => 'Observatório',
+            'icon'    => 'fas fa-microscope',
             'submenu' => [
                 [
-                    'text' => 'level_one',
+                    'text' => 'Criar Post',
                     'url'  => '#',
                 ],
                 [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
+                    'text' => 'Lista de Posts',
                     'url'  => '#',
                 ],
             ],
         ],
-        ['header' => 'labels'],
         [
-            'text'       => 'important',
+            'text'    => 'Biblioteca',
+            'icon'    => 'fas fa-book',
+            'submenu' => [
+                [
+                    'text' => 'Adicionar Livro',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Lista de Livros',
+                    'url'  => '#',
+                ],
+            ],
+        ],
+        ['header' => 'CONFIGURAÇÕES DOS EVENTOS'],
+        [
+            'text' => 'Informações Básicas',
+            'url'  => 'admin/evento',
+            'icon' => 'fas fa-fw fa-info',
+        ],
+        [
+            'text' => 'Criar Evento',
+            'url'  => 'admin/settings',
+            'icon' => 'fas fa-plus-circle',
+        ],
+        [
+            'text' => 'Lista de Eventos',
+            'url'  => 'admin/settings',
+            'icon' => 'fas fa-list-ol',
+        ],
+        [
+            'text'    => 'Configurações',
+            'icon'    => 'fas fa-book',
+            'submenu' => [
+                [
+                    'text' => 'Certificados',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Transmissão',
+                    'url'  => '#',
+                ],
+            ],
+        ],
+        ['header' => 'ACESSO RÁPIDO'],
+        [
+            'text'       => 'Blog',
             'icon_color' => 'red',
             'url'        => '#',
         ],
         [
-            'text'       => 'warning',
+            'text'       => 'Eventos',
             'icon_color' => 'yellow',
             'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+        ]
     ],
 
     /*

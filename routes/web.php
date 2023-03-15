@@ -24,7 +24,10 @@ Route::group(['prefix' => 'blog'], function() {
     Route::get('/contato', [App\Http\Controllers\Blog\BlogController::class, 'index'])->name('blog.contato');
 });
 
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.home');
+    Route::get('/usuario', [App\Http\Controllers\Admin\User\IndexController::class, 'index'])->name('admin.usuario');
+    Route::get('/blog', [App\Http\Controllers\Admin\Blog\IndexController::class, 'index'])->name('admin.blog');
+    Route::get('/evento', [App\Http\Controllers\Admin\Evento\IndexController::class, 'index'])->name('admin.evento');
 });
 
