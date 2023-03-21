@@ -49,6 +49,4 @@
             </tr>
         @endforeach
     </table>
-
-    {!! $categorias->links() !!}
 @stop

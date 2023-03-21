@@ -13,6 +13,9 @@
                     <li data-filter=".filter-app">App</li>
                     <li data-filter=".filter-card">Card</li>
                     <li data-filter=".filter-web">Web</li>
+                    @foreach( $categorias as $categoria)
+                        <li data-filter=".{{$categoria->filter_tag}}">{{$categoria->title}}</li>
+                    @endforeach
                 </ul>
             </div>
         </div>
@@ -23,12 +26,23 @@
                 <div class="portfolio-wrap">
                     <img src="{{ URL::asset('blog/img/portfolio/portfolio-1.jpg') }}" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>App 1</h4>
-                        <p>App</p>
-                    </div>
-                    <div class="portfolio-links">
-                        <a href="{{ URL::asset('blog/img/portfolio/portfolio-1.jpg') }}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                        <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                        <h4>A vantagem é que é bem simples, mas não é tão aleatório assim. Mas resolve se for para uma aplicação simples.</h4>
+                        <p>Categoria</p>
+
+                        <a href="{{ URL::asset('blog/img/portfolio/portfolio-1.jpg') }}"
+                           data-gallery="portfolioGallery"
+                           class="portfolio-lightbox"
+                           title="Visualizar"
+                           style="font-weight: bold; font-size: 32px; text-decoration: none; color: white;"
+                        >
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        <a href="portfolio-details.html"
+                           title="Acessar Link"
+                           style="font-weight: bold; font-size: 32px; text-decoration: none; color: white;"
+                        >
+                            <i class="bx bx-link"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -146,6 +160,5 @@
             </div>
 
         </div>
-
     </div>
 </section><!-- End Portfolio Section -->

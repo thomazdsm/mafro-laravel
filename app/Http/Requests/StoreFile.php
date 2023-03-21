@@ -15,7 +15,7 @@ class StoreFile extends FormRequest
         return [
             'file' => [
                 'required',
-                File::types(['png', 'jpg'])
+                File::types(['png', 'jpg', 'pdf'])
                     ->max(5 * 1024),
             ]
         ];

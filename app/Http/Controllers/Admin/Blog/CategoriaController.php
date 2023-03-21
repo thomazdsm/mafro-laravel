@@ -19,7 +19,7 @@ class CategoriaController extends Controller
      */
     public function index() : View
     {
-        $categorias = Categoria::latest()->paginate(5);
+        $categorias = Categoria::all();
         return view('admin.blog.categoria.index', compact('categorias'))->with('i', (request()->input('page', 1) -1) * 5);
     }
 

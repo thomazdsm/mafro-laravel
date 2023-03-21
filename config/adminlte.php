@@ -349,11 +349,11 @@ return [
             'submenu' => [
                 [
                     'text' => 'Adicionar Livro',
-                    'url'  => '#',
+                    'url'  => 'admin/biblioteca/create',
                 ],
                 [
                     'text' => 'Lista de Livros',
-                    'url'  => '#',
+                    'url'  => 'admin/biblioteca',
                 ],
                 [
                     'text' => 'Adicionar Categoria',

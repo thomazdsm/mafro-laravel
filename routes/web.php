@@ -32,5 +32,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
     Route::resource('posts', \App\Http\Controllers\Admin\Blog\PostController::class);
     Route::resource('categorias', \App\Http\Controllers\Admin\Blog\CategoriaController::class);
+    Route::resource('biblioteca', \App\Http\Controllers\Admin\Blog\BibliotecaController::class);
 });
 
