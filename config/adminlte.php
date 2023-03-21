@@ -253,7 +253,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '/',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -335,11 +335,11 @@ return [
             'submenu' => [
                 [
                     'text' => 'Criar Post',
-                    'url'  => '#',
+                    'url'  => 'admin/posts/create',
                 ],
                 [
                     'text' => 'Lista de Posts',
-                    'url'  => '#',
+                    'url'  => 'admin/posts',
                 ],
             ],
         ],
@@ -354,6 +354,14 @@ return [
                 [
                     'text' => 'Lista de Livros',
                     'url'  => '#',
+                ],
+                [
+                    'text' => 'Adicionar Categoria',
+                    'url'  => 'admin/categorias/create',
+                ],
+                [
+                    'text' => 'Lista de Categorias',
+                    'url'  => 'admin/categorias',
                 ],
             ],
         ],
@@ -391,12 +399,12 @@ return [
         [
             'text'       => 'Blog',
             'icon_color' => 'red',
-            'url'        => '#',
+            'url'        => '/',
         ],
         [
             'text'       => 'Eventos',
             'icon_color' => 'yellow',
-            'url'        => '#',
+            'url'        => '/',
         ]
     ],
 
@@ -455,21 +463,6 @@ return [
                 ],
             ],
         ],
-        'Select2' => [
-            'active' => false,
-            'files' => [
-                [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
-                ],
-                [
-                    'type' => 'css',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
-                ],
-            ],
-        ],
         'Chartjs' => [
             'active' => false,
             'files' => [
@@ -505,6 +498,56 @@ return [
                 ],
             ],
         ],
+        'bs-custom-file-input' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/bs-custom-file-input/bs-custom-file-input.js',
+                ],
+            ],
+        ],
+        'toastr' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/toastr/toastr.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/toastr/toastr.min.js',
+                ],
+            ],
+        ],
+        'select2' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/select2/css/select2.min.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/select2/js/select2.full.js',
+                ],
+            ],
+        ],
+        'select2-bootstrap4' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/select2-bootstrap4-theme/select2-bootstrap4.min.css',
+                ],
+            ],
+        ]
     ],
 
     /*

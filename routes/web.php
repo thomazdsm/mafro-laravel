@@ -29,5 +29,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/usuario', [App\Http\Controllers\Admin\User\IndexController::class, 'index'])->name('admin.usuario');
     Route::get('/blog', [App\Http\Controllers\Admin\Blog\IndexController::class, 'index'])->name('admin.blog');
     Route::get('/evento', [App\Http\Controllers\Admin\Evento\IndexController::class, 'index'])->name('admin.evento');
+
+    Route::resource('posts', \App\Http\Controllers\Admin\Blog\PostController::class);
+    Route::resource('categorias', \App\Http\Controllers\Admin\Blog\CategoriaController::class);
 });
 

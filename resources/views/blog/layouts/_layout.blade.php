@@ -30,6 +30,18 @@
     <link href="{{ URL::asset('blog/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href=" {{ URL::asset('css/app.css') }}">
 
+    {{-- Base Stylesheets --}}
+    @if(!config('adminlte.enabled_laravel_mix'))
+        <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+{{--        <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">--}}
+
+        @if(config('adminlte.google_fonts.allowed', true))
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        @endif
+    @else
+        <link rel="stylesheet" href="{{ mix(config('adminlte.laravel_mix_css_path', 'css/app.css')) }}">
+    @endif
     <!-- Template Main CSS File -->
     <link href="{{ URL::asset('blog/css/style.css') }}" rel="stylesheet">
 </head>
@@ -161,6 +173,17 @@ x'
     <script src="https://kit.fontawesome.com/4d3192896f.js" crossorigin="anonymous"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
+
+    {{-- Base Scripts --}}
+    @if(!config('adminlte.enabled_laravel_mix'))
+        <script src="{{ URL::asset('vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ URL::asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ URL::asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+        <script src="{{ URL::asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+    @else
+        <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
+    @endif
+
     <!-- Vendor JS Files -->
     <script src="{{ URL::asset('blog/vendor/purecounter/purecounter_vanilla.js') }}"></script>
     <script src="{{ URL::asset('blog/vendor/aos/aos.js') }}"></script>
@@ -172,5 +195,7 @@ x'
 
     <!-- Template Main JS File -->
     <script src="{{ URL::asset('blog/js/main.js') }}"></script>
+
+    @yield('blog_js')
 </body>
 </html>
