@@ -5,17 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Biblioteca extends Model
+class Perfil extends Model
 {
     use HasFactory;
 
-    public $table = 'biblioteca';
+    public $table = 'perfis';
     protected $fillable = [
-        'title',
-        'filter_tag',
-        'anexo',
-        'image',
-        'created_by',
-        'updated_by',
+        'name',
+        'descricao',
     ];
 }

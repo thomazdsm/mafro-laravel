@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Admin\Blog;
 
+use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreFile;
 use App\Models\Biblioteca;
 use App\Models\Categoria;
 use App\Models\Media;
-use App\Models\Post;
-use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BibliotecaController extends Controller
@@ -20,11 +19,18 @@ class BibliotecaController extends Controller
      */
     public function index()
     {
-        $biblioteca = Biblioteca::all();
+        $bibliotecas = Biblioteca::all();
 
-        foreach ($biblioteca as $item) {
+        foreach ($bibliotecas as $item) {
             $item->filter_tag = Categoria::where('filter_tag', $item->filter_tag)->value('title');
         }
+
+        foreach ($bibliotecas as $teste){
+            if(Gate::authorize('ver-livro', $teste)){
+                $biblioteca[] = $teste;
+            }
+        }
+
 
         return view('admin.blog.biblioteca.index', compact('biblioteca'))->with('i', (request()->input('page', 1) -1) * 5);
     }
@@ -66,7 +72,8 @@ class BibliotecaController extends Controller
                 'title' => $request->title,
                 'filter_tag' => $request->filter_tag,
                 'anexo' => $hashAnexo,
-                'image' => $hashImage
+                'image' => $hashImage,
+                'created_by' => Auth::user()->getAuthIdentifier()
             ];
 
             Biblioteca::create($postData);
@@ -111,7 +118,7 @@ class BibliotecaController extends Controller
      */
     public function show(Biblioteca $biblioteca)
     {
-        //
+        return view('admin.blog.biblioteca.show', compact('biblioteca'));
     }
 
     /**
@@ -119,7 +126,18 @@ class BibliotecaController extends Controller
      */
     public function edit(Biblioteca $biblioteca)
     {
-        //
+        $anexo = Media::where('file_hash', $biblioteca->anexo)->get()[0];
+        $anexo->tipo = 'Anexo';
+        $imagem = Media::where('file_hash', $biblioteca->image)->get()[0];
+        $imagem->tipo = 'Imagem';
+
+        $uploads = [
+            $anexo,
+            $imagem
+        ];
+
+        $categorias = Categoria::all();
+        return view('admin.blog.biblioteca.edit', compact('biblioteca', 'categorias', 'uploads'));
     }
 
     /**
@@ -127,7 +145,42 @@ class BibliotecaController extends Controller
      */
     public function update(Request $request, Biblioteca $biblioteca)
     {
-        //
+        try {
+            $request->validate([
+                'title' => 'required|min:3|max:100',
+                'filter_tag' => 'required',
+                'anexo' => 'required',
+                'imagem' => 'required'
+            ]);
+
+            $uploadedAnexo = $request->file('anexo');
+            $sizeAnexo = $uploadedAnexo->getSize();
+
+            $uploadedImagem = $request->file('imagem');
+            $sizeImagem = $uploadedImagem->getSize();
+
+            $hashAnexo = $this->uploadFile($uploadedAnexo, $sizeAnexo, 'biblioteca/anexo', 'collection'); //TODO? Fix collection
+            $hashImage = $this->uploadFile($uploadedImagem, $sizeImagem, 'biblioteca/imagem', 'collection');
+
+            DB::beginTransaction();
+
+            $postData = [
+                'title' => $request->title,
+                'filter_tag' => $request->filter_tag,
+                'anexo' => $hashAnexo,
+                'image' => $hashImage,
+                'updated_by' => Auth::user()->getAuthIdentifier()
+            ];
+
+            $biblioteca->update($postData);
+            DB::commit();
+
+            return redirect()->route('posts.index')->with('success', 'Post criado com sucesso!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            //throw $e;
+            return redirect()->route('admin.blog')->with('success', 'Erro ao criar o post!');
+        }
     }
 
     /**

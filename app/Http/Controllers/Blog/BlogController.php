@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
+use App\Models\Biblioteca;
 use App\Models\Categoria;
+use App\Models\Contato;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -18,7 +20,17 @@ class BlogController extends Controller
     {
         $posts = Post::latest()->paginate(5);
         $categorias = Categoria::all();
+        $biblioteca = Biblioteca::all();
+        $contato = Contato::first();
 
-        return view('blog.index', compact('posts', 'categorias'));
+        if($contato){
+            $contato->localizacao = $contato->rua.', '.$contato->numero.' - '.$contato->cidade.' - '.$contato->estado;
+        }
+
+        foreach ($biblioteca as $livro) {
+            $livro->tag = Categoria::where('filter_tag',$livro->filter_tag)->pluck('title')[0];
+        }
+
+        return view('blog.index', compact('posts', 'categorias', 'biblioteca', 'contato'));
     }
 }

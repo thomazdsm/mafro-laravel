@@ -315,12 +315,12 @@ return [
         ],
         [
             'text' => 'Alterar Senha',
-            'url'  => 'admin/settings',
+            'url'  => '#',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
             'text' => 'Lista de Usuários',
-            'url'  => 'admin/settings',
+            'url'  => '#',
             'icon' => 'fas fa-users-cog',
         ],
         ['header' => 'CONFIGURAÇÕES DO BLOG'],
@@ -365,6 +365,20 @@ return [
                 ],
             ],
         ],
+        [
+            'text'    => 'Contato',
+            'icon'    => 'fas fa-phone',
+            'submenu' => [
+                [
+                    'text' => 'Visualizar Contato',
+                    'route'  => 'contato.index',
+                ],
+                [
+                    'text' => 'Adicionar Contato',
+                    'route'  => 'contato.create',
+                ],
+            ],
+        ],
         ['header' => 'CONFIGURAÇÕES DOS EVENTOS'],
         [
             'text' => 'Informações Básicas',
@@ -372,39 +386,61 @@ return [
             'icon' => 'fas fa-fw fa-info',
         ],
         [
-            'text' => 'Criar Evento',
+            'text' => 'Eventos',
+            'icon'    => 'fas fa-book',
+            'submenu' => [
+                [
+                    'text' => 'Criar',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Listar',
+                    'url'  => '#',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Certificados',
+            'icon'    => 'fas fa-book',
+            'submenu' => [
+                [
+                    'text' => 'Criar',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Listar',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Autorizar',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Emitir',
+                    'url'  => '#',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Transmissão Online',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-plus-circle',
         ],
         [
-            'text' => 'Lista de Eventos',
+            'text' => 'Material de Leitura',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-list-ol',
-        ],
-        [
-            'text'    => 'Configurações',
-            'icon'    => 'fas fa-book',
-            'submenu' => [
-                [
-                    'text' => 'Certificados',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'Transmissão',
-                    'url'  => '#',
-                ],
-            ],
         ],
         ['header' => 'ACESSO RÁPIDO'],
         [
             'text'       => 'Blog',
             'icon_color' => 'red',
-            'url'        => '/',
+            'route'      => 'blog.home',
         ],
         [
             'text'       => 'Eventos',
             'icon_color' => 'yellow',
-            'url'        => '/',
+            'route'      => 'evento.home',
         ]
     ],
 
@@ -547,7 +583,17 @@ return [
                     'location' => 'vendor/select2-bootstrap4-theme/select2-bootstrap4.min.css',
                 ],
             ],
-        ]
+        ],
+        'inputmask' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/inputmask/jquery.inputmask.js',
+                ],
+            ],
+        ],
     ],
 
     /*

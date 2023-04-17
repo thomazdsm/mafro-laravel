@@ -54,4 +54,13 @@
 @section('adminlte_js')
     @stack('js')
     @yield('js')
+
+    @if ($message = Session::get('success'))
+        <script>
+            window.onload = (event) => {
+                var toast = toastr.success('Item cadastrado com sucesso!')
+                toast.show()
+            }
+        </script>
+    @endif
 @stop
