@@ -15,17 +15,6 @@
         </div>
     </div>
 
-    @if ($message = Session::get('success'))
-        @section('js')
-            <script>
-                window.onload = (event) => {
-                    var toast = toastr.success('Item cadastrado com sucesso!')
-                    toast.show()
-                }
-            </script>
-        @endsection
-    @endif
-
     <table class="table table-bordered">
         <tr>
             <th>No</th>

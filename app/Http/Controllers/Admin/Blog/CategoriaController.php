@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Admin\Blog;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categoria;
-use App\Models\Media;
-use App\Models\Post;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,6 +12,10 @@ use Illuminate\View\View;
 
 class CategoriaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:admin');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -79,11 +81,11 @@ class CategoriaController extends Controller
         try {
             $categoria->update($request->all());
 
-            return redirect()->route('categorias.index')->with('success', 'Post editado com sucesso!');
+            return redirect()->route('categorias.index')->with('success', 'Categoria editada com sucesso!');
         } catch (Exception $e){
             DB::rollBack();
             //throw $e;
-            return redirect()->route('admin.blog')->with('success', 'Erro ao editar o Categoria!');
+            return redirect()->route('admin.blog')->with('success', 'Erro ao editar a Categoria!');
         }
     }
 
@@ -92,8 +94,13 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria) : RedirectResponse
     {
-        $categoria->delete();
-
-        return redirect()->route('categorias.index')->with('success', 'Categoria excluída com sucesso!');
+        try {
+            $categoria->delete();
+            return redirect()->route('categorias.index')->with('success', 'Categoria excluída com sucesso!');
+        } catch (Exception $e) {
+            DB::rollBack();
+            //throw $e;
+            return redirect()->route('admin.blog')->with('success', 'Erro ao excluir a Categoria!');
+        }
     }
 }

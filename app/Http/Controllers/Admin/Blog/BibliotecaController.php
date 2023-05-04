@@ -14,23 +14,22 @@ use Illuminate\Support\Facades\DB;
 
 class BibliotecaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:admin');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $bibliotecas = Biblioteca::all();
+        Gate::authorize('admin');
+        $biblioteca = Biblioteca::all();
 
-        foreach ($bibliotecas as $item) {
+        foreach ($biblioteca as $item) {
             $item->filter_tag = Categoria::where('filter_tag', $item->filter_tag)->value('title');
         }
-
-        foreach ($bibliotecas as $teste){
-            if(Gate::authorize('ver-livro', $teste)){
-                $biblioteca[] = $teste;
-            }
-        }
-
 
         return view('admin.blog.biblioteca.index', compact('biblioteca'))->with('i', (request()->input('page', 1) -1) * 5);
     }

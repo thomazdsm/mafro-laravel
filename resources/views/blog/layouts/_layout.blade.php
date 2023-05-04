@@ -62,7 +62,7 @@
                     <li><a class="nav-link scrollto " href="#biblioteca">Biblioteca</a></li>
                     <li><a class="nav-link scrollto" href="#contact">Contato</a></li>
                     <li><a class="nav-link" href="{{route('admin.home')}}">Administrativo</a></li>
-                    <li><a class="getstarted" href="#" style="text-decoration: none">Eventos</a></li>
+                    <li><a class="getstarted" href="{{route('evento.home')}}" style="text-decoration: none">Eventos</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->

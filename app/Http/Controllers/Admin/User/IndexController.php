@@ -4,23 +4,28 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class IndexController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:admin');
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() : View
     {
         return view('admin.user.index');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display users profile.
      */
-    public function create()
+    public function profile() : View
     {
-        //
+        return view('admin.user.profile');
     }
 
     /**

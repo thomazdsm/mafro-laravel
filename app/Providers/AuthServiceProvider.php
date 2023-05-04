@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\PerfilUser;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Biblioteca;
 use App\Models\User;
@@ -23,10 +25,57 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('ver-livro', function (User $user, Biblioteca $biblioteca){
-//            dd($biblioteca);
-//            exit();
-            return $user->id == $biblioteca->created_by;
+        Gate::define('admin', function (){
+            try {
+                $user = Auth::user();
+                $perfilUsuario = PerfilUser::where('userid', $user->id)->where('perfilid', 1)->first();
+
+                if($perfilUsuario){
+                    return true;
+                }
+                return false;
+            } catch (\Exception $ex){
+                throw $ex;
+            }
+        });
+
+        Gate::define('aluno', function (){
+            try {
+                $user = Auth::user();
+                $perfilUsuario = PerfilUser::where('userid', $user->id)->where('perfilid', 2)->first();
+                if($perfilUsuario){
+                    return true;
+                }
+                return false;
+            } catch (\Exception $ex){
+                throw $ex;
+            }
+        });
+
+        Gate::define('professor', function (){
+            try {
+                $user = Auth::user();
+                $perfilUsuario = PerfilUser::where('userid', $user->id)->where('perfilid', 3)->first();
+                if($perfilUsuario){
+                    return true;
+                }
+                return false;
+            } catch (\Exception $ex){
+                throw $ex;
+            }
+        });
+
+        Gate::define('visitante', function (){
+            try {
+                $user = Auth::user();
+                $perfilUsuario = PerfilUser::where('userid', $user->id)->where('perfilid', 0)->first();
+                if($perfilUsuario){
+                    return true;
+                }
+                return false;
+            } catch (\Exception $ex){
+                throw $ex;
+            }
         });
     }
 }

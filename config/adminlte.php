@@ -303,6 +303,7 @@ return [
         ],
         [
             'text'        => 'Dashboard',
+            'can'         => ['admin', 'professor', 'aluno', 'visitante'],
             'url'         => 'admin',
             'icon'        => 'fas fa-tachometer-alt',
             'label_color' => 'success',
@@ -310,135 +311,210 @@ return [
         ['header' => 'CONFIGURAÇÕES DE USUÁRIO'],
         [
             'text' => 'Meu Perfil',
-            'url'  => 'admin/usuario',
+            'can'  => ['admin', 'professor', 'aluno', 'visitante'],
+            'route'  => 'users.profile',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'Alterar Senha',
-            'url'  => '#',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
             'text' => 'Lista de Usuários',
-            'url'  => '#',
+            'can'  => ['admin'],
+            'route'  => 'users.index',
             'icon' => 'fas fa-users-cog',
         ],
-        ['header' => 'CONFIGURAÇÕES DO BLOG'],
+        [
+            'header' => 'CONFIGURAÇÕES DO BLOG',
+            'can'    => ['admin']
+        ],
         [
             'text' => 'Informações Básicas',
+            'can'  => ['admin'],
             'url'  => 'admin/blog',
             'icon' => 'fas fa-fw fa-info',
         ],
         [
             'text'    => 'Observatório',
+            'can'     => ['admin'],
             'icon'    => 'fas fa-microscope',
             'submenu' => [
                 [
                     'text' => 'Criar Post',
+                    'can'  => ['admin'],
                     'url'  => 'admin/posts/create',
                 ],
                 [
                     'text' => 'Lista de Posts',
+                    'can'  => ['admin'],
                     'url'  => 'admin/posts',
                 ],
             ],
         ],
         [
             'text'    => 'Biblioteca',
+            'can'     => ['admin'],
             'icon'    => 'fas fa-book',
             'submenu' => [
                 [
                     'text' => 'Adicionar Livro',
+                    'can'  => ['admin'],
                     'url'  => 'admin/biblioteca/create',
                 ],
                 [
                     'text' => 'Lista de Livros',
+                    'can'  => ['admin'],
                     'url'  => 'admin/biblioteca',
                 ],
                 [
                     'text' => 'Adicionar Categoria',
+                    'can'  => ['admin'],
                     'url'  => 'admin/categorias/create',
                 ],
                 [
                     'text' => 'Lista de Categorias',
+                    'can'  => ['admin'],
                     'url'  => 'admin/categorias',
                 ],
             ],
         ],
         [
             'text'    => 'Contato',
+            'can'     => ['admin'],
             'icon'    => 'fas fa-phone',
             'submenu' => [
                 [
-                    'text' => 'Visualizar Contato',
+                    'text'   => 'Visualizar Contato',
+                    'can'    => ['admin'],
                     'route'  => 'contato.index',
                 ],
                 [
-                    'text' => 'Adicionar Contato',
+                    'text'   => 'Adicionar Contato',
+                    'can'    => ['admin'],
                     'route'  => 'contato.create',
                 ],
             ],
         ],
-        ['header' => 'CONFIGURAÇÕES DOS EVENTOS'],
         [
-            'text' => 'Informações Básicas',
-            'url'  => 'admin/evento',
-            'icon' => 'fas fa-fw fa-info',
+            'header' => 'CONFIGURAÇÕES DOS EVENTOS',
+            'can'    => ['admin', 'professor', 'aluno', 'visitante'],
         ],
         [
-            'text' => 'Eventos',
-            'icon'    => 'fas fa-book',
+            'text'    => 'Eventos',
+            'can'     => ['admin'],
+            'icon'    => 'fas fa-calendar-check',
             'submenu' => [
                 [
                     'text' => 'Criar',
-                    'url'  => '#',
+                    'can'  => ['admin'],
+                    'route'  => 'evento.create',
                 ],
                 [
                     'text' => 'Listar',
+                    'can'  => ['admin'],
+                    'route'  => 'evento.index',
+                ],
+                [
+                    'text' => 'Vínculos',
+                    'can'  => ['admin'],
                     'url'  => '#',
                 ],
             ],
         ],
         [
-            'text' => 'Certificados',
-            'icon'    => 'fas fa-book',
+            'text'    => 'Tipos de Evento',
+            'can'     => ['admin'],
+            'icon'    => 'fas fa-cog',
             'submenu' => [
                 [
                     'text' => 'Criar',
-                    'url'  => '#',
+                    'can'  => ['admin'],
+                    'route'  => 'tipo_evento.create',
                 ],
                 [
                     'text' => 'Listar',
-                    'url'  => '#',
+                    'can'  => ['admin'],
+                    'route'  => 'tipo_evento.index',
+                ]
+            ],
+        ],
+        [
+            'text'    => 'Certificados',
+            'can'     => ['admin', 'professor', 'aluno'],
+            'icon'    => 'fas fa-award',
+            'submenu' => [
+                [
+                    'text' => 'Criar',
+                    'can'  => ['admin'],
+                    'route'  => 'certificado.create',
+                ],
+                [
+                    'text' => 'Listar',
+                    'can'  => ['admin'],
+                    'route'  => 'certificado.index',
                 ],
                 [
                     'text' => 'Autorizar',
+                    'can'  => ['admin', 'professor'],
                     'url'  => '#',
                 ],
                 [
                     'text' => 'Emitir',
+                    'can'  => ['admin', 'professor', 'aluno'],
                     'url'  => '#',
                 ],
             ],
         ],
         [
-            'text' => 'Transmissão Online',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-plus-circle',
+            'text'    => 'Transmissão',
+            'can'     => ['admin'],
+            'icon'    => 'fas fa-microphone',
+            'submenu' => [
+                [
+                    'text' => 'Criar',
+                    'can'  => ['admin'],
+                    'route'  => 'transmissao.create',
+                ],
+                [
+                    'text' => 'Listar',
+                    'can'  => ['admin'],
+                    'route'  => 'transmissao.index',
+                ]
+            ],
+        ],
+        [
+            'text'    => 'Tipos de Transmissão',
+            'can'     => ['admin'],
+            'icon'    => 'fas fa-cog',
+            'submenu' => [
+                [
+                    'text' => 'Criar',
+                    'can'  => ['admin'],
+                    'route'  => 'tipo_transmissao.create',
+                ],
+                [
+                    'text' => 'Listar',
+                    'can'  => ['admin'],
+                    'route'  => 'tipo_transmissao.index',
+                ]
+            ],
         ],
         [
             'text' => 'Material de Leitura',
-            'url'  => 'admin/settings',
+            'can'  => ['admin', 'professor', 'aluno', 'visitante'],
+            'url'  => '#',
             'icon' => 'fas fa-list-ol',
         ],
-        ['header' => 'ACESSO RÁPIDO'],
+        [
+            'header' => 'ACESSO RÁPIDO',
+            'can'    => ['admin', 'professor', 'aluno', 'visitante'],
+        ],
         [
             'text'       => 'Blog',
+            'can'        => ['admin', 'professor', 'aluno', 'visitante'],
             'icon_color' => 'red',
             'route'      => 'blog.home',
         ],
         [
             'text'       => 'Eventos',
+            'can'        => ['admin', 'professor', 'aluno', 'visitante'],
             'icon_color' => 'yellow',
             'route'      => 'evento.home',
         ]

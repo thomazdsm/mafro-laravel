@@ -13,7 +13,6 @@
 
 @section('body')
     <div class="wrapper">
-
         {{-- Preloader Animation --}}
         @if($layoutHelper->isPreloaderEnabled())
             @include('adminlte::partials.common.preloader')
@@ -58,7 +57,7 @@
     @if ($message = Session::get('success'))
         <script>
             window.onload = (event) => {
-                var toast = toastr.success('Item cadastrado com sucesso!')
+                var toast = toastr.success('{{ $message }}')
                 toast.show()
             }
         </script>

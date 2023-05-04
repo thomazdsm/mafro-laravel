@@ -9,7 +9,7 @@ class PerfilUser extends Model
 {
     use HasFactory;
 
-    public $table = 'perfis';
+    public $table = 'perfil_users';
     protected $fillable = [
         'userid',
         'perfilid',

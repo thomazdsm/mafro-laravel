@@ -37,6 +37,8 @@ class UploadController extends Controller
     public function store(StoreFile $file, string $fileDir)
     {
         try {
+            dd($file);
+            exit();
             $userId = Auth::user()->id;
             $uploadedFile = $file;
             $size = $uploadedFile->getSize();

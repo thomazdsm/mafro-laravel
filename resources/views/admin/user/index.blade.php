@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuário | Meu Perfil')
+@section('title', 'Usuário | Lista de Usuários')
 
 @section('content_header')
-    <h1>Meu Perfil</h1>
+    <h1>Lista de Usuários</h1>
 @stop
 
 @section('content')
